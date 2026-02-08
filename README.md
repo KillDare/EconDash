@@ -1,9 +1,22 @@
-# 📱 EconDash
+Perfeito, então o que você quer é **README em Markdown de verdade** (com ícones, títulos bonitos e blocos de código), mas sem a bagunça da interface.
 
-**EconDash** é um aplicativo mobile para controle financeiro pessoal, desenvolvido com **React Native + Expo**.  
-O app permite registrar **receitas e despesas**, acompanhar **resumos diários e mensais** e visualizar informações financeiras de forma simples e intuitiva.
+Vou te entregar em **um único bloco Markdown limpo**, é só:
 
-> 📌 Projeto focado exclusivamente em **mobile**, com armazenamento **local no dispositivo**.
+1. Copiar tudo
+2. Colar direto no arquivo `README.md` do GitHub
+
+Nada de conflito.
+
+---
+
+
+# 📊 EconDash
+
+**EconDash** é um aplicativo multiplataforma para controle financeiro pessoal, desenvolvido com **React Native + Expo**, com suporte a **Web, Android e iOS**.
+
+O app permite registrar **receitas e despesas**, acompanhar **resumos diários e mensais**, visualizar indicadores financeiros e realizar **backup/importação de dados via CSV**.
+
+> Projeto com foco em experiência do usuário, persistência local e compatibilidade multiplataforma.
 
 ---
 
@@ -11,14 +24,19 @@ O app permite registrar **receitas e despesas**, acompanhar **resumos diários e
 
 - ➕ Cadastro de **receitas** e **despesas**
 - 📅 Seleção de data (hoje, ontem ou data personalizada)
-- 🗂️ Categorias específicas para receitas e despesas
-- 📊 **Dashboard** com:
+- 🗂️ Categorias personalizadas para transações
+- 📊 **Dashboard financeiro** com:
   - Gastos e ganhos do dia
   - Gastos e ganhos do mês
   - Última transação registrada
-- 💾 Armazenamento local utilizando **SQLite**
+- 💾 Armazenamento local:
+  - SQLite (mobile)
+  - Storage local (web)
+- 📤 **Exportação de dados em CSV**
+- 📥 **Importação de backups via CSV**
 - 🌙 Suporte a **modo claro e escuro**
-- 📱 Interface responsiva e otimizada para dispositivos móveis
+- 📱 Interface responsiva (mobile e desktop)
+- 🌐 Compatível com **Web, Android e iOS**
 
 ---
 
@@ -27,43 +45,64 @@ O app permite registrar **receitas e despesas**, acompanhar **resumos diários e
 - **React Native**
 - **Expo (SDK 54)**
 - **Expo Router**
-- **SQLite (armazenamento local)**
 - **TypeScript**
-- **Context API (ThemeContext)**
+- **SQLite**
+- **AsyncStorage / Web Storage**
+- **Context API**
 - **React Navigation**
 
 ---
 
 ## 📂 Estrutura do Projeto (resumo)
 
+
 app/
 ├─ (tabs)/
-│ ├─ index.tsx # Home
-│ ├─ cashflow.tsx # Adição de transações
-│ └─ dashboard.tsx # Dashboard financeiro
+│  ├─ index.tsx        # Home
+│  ├─ cashflow.tsx     # Adição de transações
+│  └─ dashboard.tsx    # Dashboard financeiro
 ├─ database/
-│ └─ sqlite.ts # Banco de dados local
+│  └─ sqlite.ts        # Banco de dados local
 ├─ hooks/
-│ └─ useFinance.ts # Lógica central de finanças
+│  └─ useFinance.ts    # Lógica central de finanças
+├─ services/
+│  └─ csv.ts           # Importação e exportação CSV
 └─ components/
-└─ themed-* # Componentes com suporte a tema
+   └─ themed-*         # Componentes com suporte a tema
+
 
 ---
 
 ## ▶️ Como Executar o Projeto
 
 ### Pré-requisitos
-- Node.js (LTS)
-- Expo CLI
-- Dispositivo físico com **Expo Go** ou emulador Android/iOS
+
+* Node.js (LTS)
+* Expo CLI
 
 ### Passos
 
-```bash
 # Instalar dependências
 npm install
 
 # Iniciar o projeto
-npx expo start
+npx expo start (mobile)
+npx expo web (web)
 
-Escaneie o QR Code com o Expo Go ou execute em um emulador.
+
+## 🌐 Versão Web
+
+A versão web do projeto pode ser acessada em:
+
+👉 [https://killdare.github.io/EconDash](https://killdare.github.io/EconDash)
+
+---
+
+## 🎯 Objetivo do Projeto
+
+Este projeto foi desenvolvido com o objetivo de:
+
+* Consolidar conhecimentos em **React Native**
+* Criar uma aplicação **real e utilizável**
+* Explorar desenvolvimento **multiplataforma com Expo**
+* Aplicar conceitos de **estado global, persistência e UX**
