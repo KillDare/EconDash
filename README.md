@@ -55,7 +55,7 @@ O app permite registrar **receitas e despesas**, acompanhar **resumos diários e
 
 ## 📂 Estrutura do Projeto (resumo)
 
-
+```txt
 app/
 ├─ (tabs)/
 │  ├─ index.tsx        # Home
@@ -69,7 +69,7 @@ app/
 │  └─ csv.ts           # Importação e exportação CSV
 └─ components/
    └─ themed-*         # Componentes com suporte a tema
-
+```
 
 ---
 
