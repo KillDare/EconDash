@@ -1,5 +1,5 @@
-import { Expense, getExpenses, getIncomes, Income } from '@/app/database/sqlite';
 import { useTheme } from '@/constants/ThemeContext';
+import { Expense, Income, getExpenses, getIncomes } from '@/database/index';
 import { useCallback, useEffect, useState } from 'react';
 
 type CategoryData = {

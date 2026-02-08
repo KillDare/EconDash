@@ -5,11 +5,11 @@ import { useEffect } from 'react';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import 'react-native-reanimated';
 
-import { initDatabase } from '@/app/database/sqlite';
 import {
   ThemeProvider as AppThemeProvider,
   useTheme,
 } from '@/constants/ThemeContext';
+import { initDatabase } from '@/database/index';
 
 function NavigationThemeProvider({ children }: { children: React.ReactNode }) {
   const { mode } = useTheme();

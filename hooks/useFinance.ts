@@ -1,11 +1,4 @@
-import {
-  Expense,
-  Income,
-  getExpenses,
-  getIncomes,
-  getTotals,
-  initDatabase,
-} from '@/app/database/sqlite';
+import { Expense, Income, getExpenses, getIncomes, getTotals, initDatabase } from '@/database/index';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 export function useFinance() {

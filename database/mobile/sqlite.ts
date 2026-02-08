@@ -1,21 +1,7 @@
+import { Expense, Income } from '@/database/index';
 import * as SQLite from 'expo-sqlite';
 
-/* =========================
-   TIPOS
-========================= */
 
-export type TransactionType = 'fixed' | 'variable' | 'extra';
-
-export type Expense = {
-  id: number;
-  title: string;
-  amount: number;
-  category: string;
-  type: TransactionType;
-  date: string;
-};
-
-export type Income = Expense;
 
 /* =========================
    SINGLETON DO BANCO

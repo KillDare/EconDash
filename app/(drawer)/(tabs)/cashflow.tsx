@@ -7,7 +7,8 @@ import {
   KeyboardAvoidingView, Platform,
   Pressable,
   ScrollView,
-  StyleSheet, TextInput
+  StyleSheet, TextInput,
+  useWindowDimensions
 } from 'react-native';
 
 import MaskInput, { Masks } from 'react-native-mask-input';
@@ -16,8 +17,8 @@ import { ThemedButton } from '@/components/themed-button';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 
-import { addExpense, addIncome } from '@/app/database/sqlite';
 import { useTheme } from '@/constants/ThemeContext';
+import { addExpense, addIncome } from '@/database/index';
 
 type TransactionKind = 'expense' | 'income';
 
@@ -36,6 +37,10 @@ export default function CashflowScreen() {
   const [amount, setAmount] = useState('');
   const [amountNumber, setAmountNumber] = useState(0);
   const [category, setCategory] = useState('');
+  
+  const { width } = useWindowDimensions();
+  const isWeb = Platform.OS === 'web';
+  const isDesktop = isWeb && width >= 1024;
 
   const EXPENSE_CATEGORIES = [
     { label: 'Alimentação', icon: 'restaurant' },
@@ -98,14 +103,21 @@ export default function CashflowScreen() {
     router.back();
   }
 
+  const formatDateForInput = (date: Date) => {
+    return date.toISOString().split('T')[0]; // yyyy-mm-dd
+  };
+
+
   return (
     <KeyboardAvoidingView
-      style={{ flex: 1 }}
+      style={{ flex: 1,}}
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
     >
       <ScrollView
         contentContainerStyle={{ flexGrow: 1, paddingBottom: tabBarHeight + 80, }}
         keyboardShouldPersistTaps="handled"
+        style={{maxWidth: isDesktop ? 1200 : '100%', marginHorizontal: 'auto', minWidth: isDesktop ? 1200 : '100%', }}
+
       >
         <ThemedView
           style={[
@@ -185,31 +197,34 @@ export default function CashflowScreen() {
 
 
           {/* Data */}
-          <Pressable
-            onPress={() => setShowDatePicker(true)}
-            style={[
-              styles.input,
-              {
-                borderColor: theme.icon,
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-              },
-            ]}
-          >
-            <ThemedText>
-              {date.toLocaleDateString('pt-BR')}
-            </ThemedText>
 
-            <Ionicons name="calendar" size={20} color={theme.icon} />
-          </Pressable>
+          {/* MOBILE */}
+          {(Platform.OS !== 'web' && !showDatePicker) && (
+            <Pressable
+              onPress={() => setShowDatePicker(true)}
+              style={[
+                styles.input,
+                {
+                  borderColor: theme.icon,
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                },
+              ]}
+            >
+              <ThemedText>
+                {date.toLocaleDateString('pt-BR')}
+              </ThemedText>
 
-          {showDatePicker && (
+              <Ionicons name="calendar" size={20} color={theme.icon} />
+            </Pressable>
+          )}
+          {showDatePicker && Platform.OS !== 'web' && (
             <DateTimePicker
               value={date}
               mode="date"
               display={Platform.OS === 'ios' ? 'spinner' : 'default'}
-              maximumDate={new Date()} // impede datas futuras
+              maximumDate={new Date()}
               onChange={(_, selectedDate) => {
                 setShowDatePicker(false);
                 if (selectedDate) {
@@ -218,6 +233,29 @@ export default function CashflowScreen() {
               }}
             />
           )}
+
+          {/* WEB */}
+          {Platform.OS === 'web' && (
+            <input
+              type="date"
+              value={formatDateForInput(date)}
+              max={formatDateForInput(new Date())}
+              onChange={(e) => {
+                setDate(new Date(e.target.value + 'T00:00:00'));
+                setShowDatePicker(false);
+              }}
+              style={{
+                padding: 12,
+                borderRadius: 8,
+                border: `1px solid ${theme.icon}`,
+                backgroundColor: theme.background,
+                color: theme.text,
+                fontSize: 16,
+              }}
+            />
+          )}
+          
+          {/* ATALHOS */}
           <ThemedView style={{ flexDirection: 'row', gap: 8 }}>
             <ThemedButton
               title="Hoje"

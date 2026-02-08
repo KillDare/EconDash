@@ -12,7 +12,6 @@ export default function DrawerLayout() {
   return (
     <Drawer
       screenOptions={{
-        // 🎨 Drawer inteiro no ThemeContext
         headerStyle: {
           backgroundColor: theme.background,
         },
