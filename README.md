@@ -1,13 +1,3 @@
-Perfeito, então o que você quer é **README em Markdown de verdade** (com ícones, títulos bonitos e blocos de código), mas sem a bagunça da interface.
-
-Vou te entregar em **um único bloco Markdown limpo**, é só:
-
-1. Copiar tudo
-2. Colar direto no arquivo `README.md` do GitHub
-
-Nada de conflito.
-
----
 
 
 # 📊 EconDash
