@@ -3,9 +3,6 @@ node_modules
 .expo
 .expo-shared
 
-# Build
-dist
-
 # IDE / OS
 .vscode
 .DS_Store
