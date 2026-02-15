@@ -26,7 +26,8 @@
       "output": "static",
       "favicon": "./assets/images/favicon.png",
       "basePath": "/EconDash",
-      "bundler": "metro"
+      "bundler": "metro",
+      "publicPath": "/EconDash/"
     },
     "assetBundlePatterns": ["**/*"],
     "plugins": [
