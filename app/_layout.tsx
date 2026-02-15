@@ -1,21 +1,27 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { Stack } from 'expo-router';
-import { StatusBar } from 'expo-status-bar';
-import { useEffect } from 'react';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import 'react-native-reanimated';
+import { Ionicons, MaterialIcons } from "@expo/vector-icons";
+import {
+  DarkTheme,
+  DefaultTheme,
+  ThemeProvider,
+} from "@react-navigation/native";
+import { useFonts } from "expo-font";
+import { Stack } from "expo-router";
+import { StatusBar } from "expo-status-bar";
+import { useEffect } from "react";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+import "react-native-reanimated";
 
 import {
   ThemeProvider as AppThemeProvider,
   useTheme,
-} from '@/constants/ThemeContext';
-import { initDatabase } from '@/database/index';
+} from "@/constants/ThemeContext";
+import { initDatabase } from "@/database/index";
 
 function NavigationThemeProvider({ children }: { children: React.ReactNode }) {
   const { mode } = useTheme();
 
   return (
-    <ThemeProvider value={mode === 'dark' ? DarkTheme : DefaultTheme}>
+    <ThemeProvider value={mode === "dark" ? DarkTheme : DefaultTheme}>
       {children}
     </ThemeProvider>
   );
@@ -23,6 +29,14 @@ function NavigationThemeProvider({ children }: { children: React.ReactNode }) {
 
 function AppContent() {
   const { mode } = useTheme();
+  const [loaded] = useFonts({
+    ...Ionicons.font,
+    ...MaterialIcons.font,
+  });
+
+  if (!loaded) {
+    return null; // ou splash/loading
+  }
 
   return (
     <>
@@ -30,15 +44,15 @@ function AppContent() {
         <Stack.Screen name="(drawer)" options={{ headerShown: false }} />
       </Stack>
 
-      <StatusBar style={mode === 'dark' ? 'light' : 'dark'} />
+      <StatusBar style={mode === "dark" ? "light" : "dark"} />
     </>
   );
 }
 
 export default function RootLayout() {
   useEffect(() => {
-    initDatabase().catch(error =>
-      console.error('Erro ao inicializar banco:', error)
+    initDatabase().catch((error) =>
+      console.error("Erro ao inicializar banco:", error),
     );
   }, []);
 
